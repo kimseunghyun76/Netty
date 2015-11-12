@@ -1,4 +1,4 @@
-package com.ksh.netty.discard;
+package com.ksh.notnetty.discard;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

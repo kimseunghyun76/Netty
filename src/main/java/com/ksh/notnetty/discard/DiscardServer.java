@@ -1,39 +1,36 @@
-package com.ksh.netty.echo;
+package com.ksh.notnetty.discard;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.*;
-import io.netty.channel.epoll.EpollEventLoopGroup;
-import io.netty.channel.epoll.EpollServerSocketChannel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
-
 
 /**
  * Created by Helloworld
  * User : USER
- * Date : 2015-11-12
- * Time : 오전 11:42
+ * Date : 2015-11-10
+ * Time : ���� 3:57
  * To change this template use File | Settings | File and Code Templates.
  */
-public class EchoServer {
+
+public class DiscardServer {
     public static void main(String[] args) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-        try {
+
+        try{
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                   // .handler(new LoggingHandler(LogLevel.INFO))
-                    .childOption(ChannelOption.SO_LINGER,0)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void initChannel(SocketChannel ch) {
-                            ChannelPipeline channelPipeline = ch.pipeline();
-                            channelPipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
-                            channelPipeline.addLast(new EchoServerHandler());
+                        public void initChannel(SocketChannel socketChannel){
+                            ChannelPipeline channelPipeline = socketChannel.pipeline();
+                            channelPipeline.addLast(new DiscardServerHandler());
                         }
                     });
             ChannelFuture channelFuture = serverBootstrap.bind(8888).sync();

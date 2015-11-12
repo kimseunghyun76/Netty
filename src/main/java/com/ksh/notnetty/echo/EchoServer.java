@@ -1,4 +1,4 @@
-package com.ksh.netty.discard;
+package com.ksh.notnetty.echo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -13,11 +13,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * Created by Helloworld
  * User : USER
  * Date : 2015-11-10
- * Time : ¿ÀÈÄ 3:57
+ * Time : ï¿½ï¿½ï¿½ï¿½ 3:57
  * To change this template use File | Settings | File and Code Templates.
  */
 
-public class DiscardServer {
+public class EchoServer {
     public static void main(String[] args) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -30,7 +30,7 @@ public class DiscardServer {
                         @Override
                         public void initChannel(SocketChannel socketChannel){
                             ChannelPipeline channelPipeline = socketChannel.pipeline();
-                            channelPipeline.addLast(new DiscardServerHandler());
+                            channelPipeline.addLast(new EchoServerHandler());
                         }
                     });
             ChannelFuture channelFuture = serverBootstrap.bind(8888).sync();

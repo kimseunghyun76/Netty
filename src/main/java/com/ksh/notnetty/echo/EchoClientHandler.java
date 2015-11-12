@@ -1,6 +1,5 @@
-package com.ksh.netty.echo;
+package com.ksh.notnetty.echo;
 
-import com.ksh.notnetty.echo.EchoServerHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

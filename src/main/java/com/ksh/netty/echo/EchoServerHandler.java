@@ -3,7 +3,6 @@ package com.ksh.netty.echo;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,11 +11,11 @@ import java.nio.charset.Charset;
 /**
  * Created by Helloworld
  * User : USER
- * Date : 2015-11-10
- * Time : ���� 4:07
+ * Date : 2015-11-12
+ * Time : 오전 11:48
  * To change this template use File | Settings | File and Code Templates.
  */
-public class EchoServerHandler extends ChannelInboundHandlerAdapter {
+public class EchoServerHandler  extends ChannelInboundHandlerAdapter {
 
     static Logger logger = LoggerFactory.getLogger(EchoServerHandler.class);
 

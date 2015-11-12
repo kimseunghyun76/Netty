@@ -1,8 +1,6 @@
-package com.ksh.netty.echo;
+package com.ksh.notnetty.echo;
 
-import com.ksh.notnetty.echo.EchoServerHandler;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
@@ -14,40 +12,31 @@ import java.nio.charset.Charset;
  * Created by Helloworld
  * User : USER
  * Date : 2015-11-10
- * Time : 오후 5:48
+ * Time : ���� 4:07
  * To change this template use File | Settings | File and Code Templates.
  */
-public class EchoClientHandler extends ChannelInboundHandlerAdapter {
+public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     static Logger logger = LoggerFactory.getLogger(EchoServerHandler.class);
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        final String sendMessage = "Hello World";
-
-        ByteBuf messageBuffer = Unpooled.buffer();
-        messageBuffer.writeBytes(sendMessage.getBytes());
-
-        logger.info("전송한 문자열 [{}]",sendMessage);
-        ctx.writeAndFlush(messageBuffer);
-    }
-
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        String readMessage = ((ByteBuf)msg).toString(Charset.defaultCharset());
 
-        logger.info("수신한 문자열 [{}]",readMessage);
+        String readMessage = ((ByteBuf)msg).toString(Charset.defaultCharset());
+        logger.info("들어온 데이터 {}","1");
+        logger.info(readMessage);
+        ctx.write(msg);
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        ctx.close();
+        ctx.flush();
     }
-
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
         ctx.close();
+
     }
 }
